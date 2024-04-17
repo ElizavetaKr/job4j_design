@@ -15,7 +15,7 @@ class NameLoadTest {
     @Test
     void checkParse() {
         NameLoad nameLoad = new NameLoad();
-        assertThatThrownBy(() -> nameLoad.parse())
+        assertThatThrownBy(nameLoad::parse)
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("is empty");
     }
