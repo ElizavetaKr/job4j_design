@@ -19,10 +19,10 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public boolean put(K key, V value) {
-        if ((float) count / capacity >= LOAD_FACTOR) {
+        if (count * 1.0 / capacity >= LOAD_FACTOR) {
             expand();
         }
-        int position = indexFor(hash(Objects.hashCode(key)));
+        int position = index(key);
         MapEntry<K, V> map = new MapEntry<>(key, value);
         if (table[position] == null) {
             table[position] = map;
@@ -40,12 +40,16 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
         return hash & (capacity - 1);
     }
 
+    private int index(K key) {
+        return indexFor(hash(Objects.hashCode(key)));
+    }
+
     private void expand() {
         capacity = capacity * 2;
         MapEntry<K, V>[] newTable = new MapEntry[capacity];
         for (MapEntry<K, V> element : table) {
             if (element != null) {
-                int position = indexFor(hash(Objects.hashCode(element.key)));
+                int position = index(element.key);
                 newTable[position] = element;
             }
         }
@@ -54,14 +58,14 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public V get(K key) {
-        int position = indexFor(hash(Objects.hashCode(key)));
+        int position = index(key);
         return keyEquals(key)
                 ? table[position].value : null;
     }
 
     @Override
     public boolean remove(K key) {
-        int position = indexFor(hash(Objects.hashCode(key)));
+        int position = index(key);
         boolean result = keyEquals(key);
         if (result) {
             table[position] = null;
@@ -72,7 +76,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     }
 
     private boolean keyEquals(K key) {
-        int position = indexFor(hash(Objects.hashCode(key)));
+        int position = index(key);
         return table[position] != null
                 && Objects.hashCode(key) == Objects.hashCode(table[position].key)
                 && Objects.equals(key, table[position].key);
