@@ -15,7 +15,13 @@ public class LogFilter {
     public List<String> filter() {
         List<String> result = Collections.emptyList();
         try (BufferedReader input = new BufferedReader(new FileReader(file))) {
-            result = input.lines().filter(n -> n.contains(" 404 ")).collect(Collectors.toList());
+            result = input
+                    .lines()
+                    .filter(n -> {
+                                String[] array = n.split(" ");
+                                return array[array.length - 2].contains("404");
+                            })
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
         }
