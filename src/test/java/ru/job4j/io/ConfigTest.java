@@ -29,4 +29,18 @@ class ConfigTest {
         Config config = new Config(path);
         assertThrows(IllegalArgumentException.class, config::load);
     }
+
+    @Test
+    void whenPatternNotCompleteWithoutKey() {
+        String path = "./data/pattern_not_complete_without_key.properties";
+        Config config = new Config(path);
+        assertThrows(IllegalArgumentException.class, config::load);
+    }
+
+    @Test
+    void whenPatternNotCompleteWithoutValue() {
+        String path = "./data/pattern_not_complete_without_value.properties";
+        Config config = new Config(path);
+        assertThrows(IllegalArgumentException.class, config::load);
+    }
 }
