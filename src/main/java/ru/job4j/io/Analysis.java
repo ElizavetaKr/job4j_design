@@ -11,8 +11,7 @@ public class Analysis {
             while ((line = reader.readLine()) != null) {
                 if (work) {
                     if (line.contains("400") || line.contains("500")) {
-                        output.write(line.substring(4));
-                        output.write(";");
+                        output.append(line.substring(4)).append(";");
                         work = false;
                     }
                 } else if (!line.contains("400") && !line.contains("500")) {
