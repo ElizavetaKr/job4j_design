@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
-    Map<FileProperty, List<String>> map = new HashMap<>();
+    Map<FileProperty, List<Path>> map = new HashMap<>();
 
     @Override
 
@@ -21,24 +21,16 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
         Path path = file.toAbsolutePath();
         FileProperty newFile = new FileProperty(path.toFile().length(), path.getFileName().toString());
-        if (map.containsKey(newFile) && map.get(newFile) != null) {
-            map.get(newFile).add(path.toString());
-        } else {
-            map.computeIfAbsent(newFile, key -> {
-                List<String> list = new ArrayList<>();
-                list.add(path.toString());
-                return list;
-            });
-        }
+        map.computeIfAbsent(newFile, key -> new ArrayList<>()).add(path);
+        return super.visitFile(file, attributes);
+    }
 
-
+    public void print() {
         map.forEach((k, v) -> {
             if (v.size() > 1) {
                 System.out.println(k.getName() + " - " + k.getSize());
                 v.forEach(System.out::println);
             }
         });
-
-        return super.visitFile(file, attributes);
     }
 }
