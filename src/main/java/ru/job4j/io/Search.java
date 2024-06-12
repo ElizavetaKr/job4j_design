@@ -23,11 +23,11 @@ public class Search {
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
-        if (!args[0].startsWith(".")) {
-            throw new IllegalArgumentException(String.format("The folder is not set correctly"));
+        if (!file.isDirectory()) {
+            throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
         if (!args[1].startsWith(".")) {
-            throw new IllegalArgumentException(String.format("The extension is not set correctly"));
+            throw new IllegalArgumentException("The extension is not set correctly");
         }
     }
 
