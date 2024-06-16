@@ -10,13 +10,10 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        validation(args);
-        Path start = Paths.get(args[0]);
-        search(start, path -> path.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
 
     public static void validation(String[] args) {
-        if (args.length != 2) {
+        if (args.length != 3) {
             throw new IllegalArgumentException("The wrong number of parameters is set");
         }
         File file = new File(args[0]);
@@ -28,6 +25,9 @@ public class Search {
         }
         if (!args[1].startsWith(".")) {
             throw new IllegalArgumentException("The extension is not set correctly");
+        }
+        if (!args[2].endsWith(".zip")) {
+            throw new IllegalArgumentException("The archive name is not set correctly");
         }
     }
 

@@ -14,6 +14,10 @@ public class ArgsName {
         return values.get(key);
     }
 
+    public String[] getValues() {
+        return values.values().toArray(new String[0]);
+    }
+
     private void parse(String[] args) {
         for (String param : args) {
             String[] arr = param.split("=", 2);
