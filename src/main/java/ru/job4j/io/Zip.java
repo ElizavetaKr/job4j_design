@@ -26,14 +26,23 @@ public class Zip {
         }
     }
 
+    private static ArgsName validation(String[] args) {
+        ArgsName param = ArgsName.of(args);
+        Search.validation(param.getValues());
+
+        if (!args[2].endsWith(".zip")) {
+            throw new IllegalArgumentException("The archive name is not set correctly");
+        }
+        return param;
+    }
+
     public static void main(String[] args) throws IOException {
         Zip zip = new Zip();
         zip.packSingleFile(
                 new File("./pom.xml"),
                 new File("./pom.zip")
         );
-        ArgsName param = ArgsName.of(args);
-        Search.validation(param.getValues());
+        ArgsName param = validation(args);
         List<Path> sources = Search.search(Paths.get(param.get("d")), path -> path.toFile().getName().endsWith(param.get("e")));
         zip.packFiles(sources, new File(param.get("o")));
     }

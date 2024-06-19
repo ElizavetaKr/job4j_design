@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -25,9 +24,6 @@ public class Search {
         }
         if (!args[1].startsWith(".")) {
             throw new IllegalArgumentException("The extension is not set correctly");
-        }
-        if (!args[2].endsWith(".zip")) {
-            throw new IllegalArgumentException("The archive name is not set correctly");
         }
     }
 
