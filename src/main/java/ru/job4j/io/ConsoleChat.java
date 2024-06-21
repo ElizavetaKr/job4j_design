@@ -23,7 +23,8 @@ public class ConsoleChat {
         boolean answer = true;
         String consoleAnswer;
         String question = "";
-        while (!question.equals(OUT)) {
+        List<String> botAnswers = readPhrases();
+        while (!OUT.equals(question)) {
             consoleAnswer = "Введите строку: ";
             System.out.println(consoleAnswer);
             saveLog(List.of(consoleAnswer, System.lineSeparator()));
@@ -32,19 +33,18 @@ public class ConsoleChat {
             question = console.nextLine();
             saveLog(List.of(question, System.lineSeparator()));
 
-            if (question.equals(STOP)) {
+            if (STOP.equals(question)) {
                 answer = false;
             }
 
-            if (answer && !question.equals(OUT)) {
-                List<String> botAnswers = readPhrases();
+            if (answer && !OUT.equals(question)) {
                 int index = (int) (Math.random() * botAnswers.size());
                 consoleAnswer = botAnswers.get(index);
                 System.out.println(consoleAnswer);
                 saveLog(List.of(consoleAnswer, System.lineSeparator()));
             }
 
-            if (question.equals(CONTINUE)) {
+            if (CONTINUE.equals(question)) {
                 answer = true;
             }
         }
