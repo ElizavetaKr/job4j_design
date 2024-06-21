@@ -28,8 +28,19 @@ public class Zip {
 
     private static ArgsName validation(String[] args) {
         ArgsName param = ArgsName.of(args);
-        Search.validation(param.getValues());
-
+        if (args.length != 3) {
+            throw new IllegalArgumentException("The wrong number of parameters is set");
+        }
+        File file = new File(args[0]);
+        if (!file.exists()) {
+            throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
+        }
+        if (!file.isDirectory()) {
+            throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
+        }
+        if (!args[1].startsWith(".")) {
+            throw new IllegalArgumentException("The extension is not set correctly");
+        }
         if (!args[2].endsWith(".zip")) {
             throw new IllegalArgumentException("The archive name is not set correctly");
         }
