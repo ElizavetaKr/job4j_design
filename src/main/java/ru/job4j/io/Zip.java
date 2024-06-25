@@ -31,17 +31,17 @@ public class Zip {
         if (args.length != 3) {
             throw new IllegalArgumentException("The wrong number of parameters is set");
         }
-        File file = new File(args[0]);
+        File file = new File(param.get("d"));
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
-        if (!args[1].startsWith(".")) {
+        if (!param.get("e").startsWith(".")) {
             throw new IllegalArgumentException("The extension is not set correctly");
         }
-        if (!args[2].endsWith(".zip")) {
+        if (!param.get("o").endsWith(".zip")) {
             throw new IllegalArgumentException("The archive name is not set correctly");
         }
         return param;
