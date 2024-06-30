@@ -15,7 +15,6 @@ public class EchoServer {
 
                     String str = input.readLine();
                     if (str.contains("/?msg=Exit")) {
-                        output.write(input.readLine().getBytes());
                         server.close();
                         return;
                     } else if (str.contains("/?msg=Hello")) {
