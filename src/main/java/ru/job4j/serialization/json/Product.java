@@ -1,8 +1,16 @@
 package ru.job4j.serialization.json;
 
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "product")
 public class Product {
-    private final String clothes;
-    private final int price;
+    @XmlAttribute
+    private String clothes;
+    @XmlAttribute
+    private int price;
+
+    public Product() { }
 
     public Product(String clothes, int price) {
         this.clothes = clothes;
