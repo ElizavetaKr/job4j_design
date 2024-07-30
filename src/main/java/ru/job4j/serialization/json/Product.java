@@ -24,4 +24,20 @@ public class Product {
                 + ", price=" + price
                 + '}';
     }
+
+    public String getClothes() {
+        return clothes;
+    }
+
+    public void setClothes(String clothes) {
+        this.clothes = clothes;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }
