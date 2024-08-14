@@ -42,3 +42,7 @@ join people p on devices_people.people_id = p.id
 group by p.name
 having avg(d.price) > 5000;
 
+select name, price
+from product
+where price = (select max(price) from product);
+
