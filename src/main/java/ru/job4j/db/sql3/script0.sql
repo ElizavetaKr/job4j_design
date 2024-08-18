@@ -36,23 +36,17 @@ select * from departments
 cross join employees;
 
 /*5.Используя cross join составить все возможные разнополые пары. Исключите дублирование*/
-create table teens1(
+create table teens(
 id serial primary key,
 name varchar(255),
 gender bool
 );
 
-create table teens2(
-id serial primary key,
-name varchar(255),
-gender bool
-);
+insert into teens(name, gender) values ('Marina', '0'), ('Inna', '0'), ('Anna', '0'), ('Rita', '0'), ('Karina', '0'),
+ ('Boris', '1'), ('Ivan', '1'), ('Kiril', '1'), ('Petya', '1');
 
-insert into teens1(name, gender) values ('Marina', '0'), ('Inna', '0'), ('Anna', '0'), ('Rita', '0'), ('Karina', '0');
-insert into teens2(name, gender) values ('Boris', '1'), ('Ivan', '1'), ('Kiril', '1'), ('Petya', '1');
-
-select * from teens1
-cross join teens2;
+select t1.name, t2.name from teens t1 cross join teens t2
+	where t1.gender != t2.gender and t2.gender = '0';
 
 
 
