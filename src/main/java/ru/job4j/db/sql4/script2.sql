@@ -91,9 +91,7 @@ or replace function tax_row()
     returns trigger as
 $$
     BEGIN
-        update products
-        set price = price * 1.2
-        where id = new.id;
+        new.price = new.price * 1.2;
         return NEW;
     END;
 $$
